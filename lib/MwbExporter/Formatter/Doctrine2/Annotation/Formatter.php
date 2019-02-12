@@ -41,6 +41,7 @@ class Formatter extends BaseFormatter
     const CFG_GENERATE_EXTENDABLE_ENTITY     = 'generateExtendableEntity';
     const CFG_QUOTE_IDENTIFIER_STRATEGY      = 'quoteIdentifierStrategy';
     const CFG_COLUMN_NAME_CODING_STYLE       = 'columnNameCodingStyle';
+    const CFG_REMOVE_IDS_FROM_COLUMN_NAMES   = 'removeColumnNamesFromIds';
 
     const QUOTE_IDENTIFIER_AUTO              = 'auto';
     const QUOTE_IDENTIFIER_ALWAYS            = 'always';
@@ -50,16 +51,17 @@ class Formatter extends BaseFormatter
     {
         parent::init();
         $this->addConfigurations(array(
-        static::CFG_INDENTATION                     => 4,
-        static::CFG_FILENAME                        => '%entity%.%extension%',
-        static::CFG_ANNOTATION_PREFIX               => 'ORM\\',
-        static::CFG_SKIP_GETTER_SETTER              => false,
-        static::CFG_GENERATE_ENTITY_SERIALIZATION   => true,
-        static::CFG_GENERATE_EXTENDABLE_ENTITY      => false,
-        static::CFG_QUOTE_IDENTIFIER_STRATEGY       => static::QUOTE_IDENTIFIER_AUTO,
-        static::CFG_EXTENDS_CLASS                   => '',
-        static::CFG_PROPERTY_TYPEHINT               => false,
-        static::CFG_COLUMN_NAME_CODING_STYLE        => ''
+            static::CFG_INDENTATION                     => 4,
+            static::CFG_FILENAME                        => '%entity%.%extension%',
+            static::CFG_ANNOTATION_PREFIX               => 'ORM\\',
+            static::CFG_SKIP_GETTER_SETTER              => false,
+            static::CFG_GENERATE_ENTITY_SERIALIZATION   => true,
+            static::CFG_GENERATE_EXTENDABLE_ENTITY      => false,
+            static::CFG_QUOTE_IDENTIFIER_STRATEGY       => static::QUOTE_IDENTIFIER_AUTO,
+            static::CFG_EXTENDS_CLASS                   => '',
+            static::CFG_PROPERTY_TYPEHINT               => false,
+            static::CFG_COLUMN_NAME_CODING_STYLE        => '',
+            static::CFG_REMOVE_IDS_FROM_COLUMN_NAMES    => false
         ));
         $this->addValidators(array(
             static::CFG_QUOTE_IDENTIFIER_STRATEGY       => new ChoiceValidator(array(

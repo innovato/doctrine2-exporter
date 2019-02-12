@@ -128,11 +128,41 @@ class Column extends BaseColumn
     {
         switch ($this->getConfig()->get(Formatter::CFG_COLUMN_NAME_CODING_STYLE)) {
             case 'lowercamelcase':
-                return lcfirst($this->getBeautifiedColumnName());
+                return $this->replace(lcfirst($this->getBeautifiedColumnName()));
                 break;
             default:
-                return $this->getColumnName();
+                return $this->replace($this->getColumnName());
                 break;
         }
+    }
+
+    private function replace($column)
+    {
+        if (!Formatter::CFG_REMOVE_IDS_FROM_COLUMN_NAMES) {
+            return $column;
+        }
+
+        $ids = [
+            '_id',
+            'Id'
+        ];
+
+        foreach ($ids as $id) {
+            $column = $this->str_lreplace($id, '', $column);
+        }
+
+        return $column;
+    }
+
+    private function str_lreplace($search, $replace, $subject)
+    {
+        $pos = strrpos($subject, $search);
+
+        if($pos !== false)
+        {
+            $subject = substr_replace($subject, $replace, $pos, strlen($search));
+        }
+
+        return $subject;
     }
 }

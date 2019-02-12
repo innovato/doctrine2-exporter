@@ -80,6 +80,12 @@ Common Setup Options for Doctrine 2.0:
     Changes the coding style of the column names (lowercamelcase or underscore).
 
     Default is `underscore`.
+    
+  * `removeColumnNamesFromIds`
+
+    Remove _id from column names.
+
+    Default is `false`.
 
 ### Doctrine 2.0 YAML Schema
 
