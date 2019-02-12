@@ -74,6 +74,12 @@ Common Setup Options for Doctrine 2.0:
     The default cascade option to define.
 
     Default is `false`.
+    
+  * `columnNameCodingStyle`
+
+    Changes the coding style of the column names (lowercamelcase or underscore).
+
+    Default is `underscore`.
 
 ### Doctrine 2.0 YAML Schema
 
