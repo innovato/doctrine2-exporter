@@ -46,7 +46,7 @@ class Column extends BaseColumn
                 ->writeIf($this->isAutoIncrement(),
                         ' * '.$this->getTable()->getAnnotation('GeneratedValue', array('strategy' => strtoupper($this->getConfig()->get(Formatter::CFG_GENERATED_VALUE_STRATEGY)))))
                 ->write(' */')
-                ->write('protected $'.$this->getColumnName().';')
+                ->write('protected $'.$this->getStyledColumnName().';')
                 ->write('')
             ;
         }
@@ -76,7 +76,7 @@ class Column extends BaseColumn
                 ->write('public function set'.$this->getBeautifiedColumnName().'('.$typehint.'$'.$this->getColumnName().')')
                 ->write('{')
                 ->indent()
-                    ->write('$this->'.$this->getColumnName().' = $'.$this->getColumnName().';')
+                    ->write('$this->'.$this->getStyledColumnName().' = $'.$this->getStyledColumnName().';')
                     ->write('')
                     ->write('return $this;')
                 ->outdent()
@@ -122,5 +122,17 @@ class Column extends BaseColumn
         }
 
         return $attributes;
+    }
+
+    private function getStyledColumnName()
+    {
+        switch ($this->getConfig()->get(Formatter::CFG_COLUMN_NAME_CODING_STYLE)) {
+            case 'lowercamelcase':
+                return lcfirst($this->getBeautifiedColumnName());
+                break;
+            default:
+                return $this->getColumnName();
+                break;
+        }
     }
 }
